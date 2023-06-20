@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  font-family: $font-main;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: $font-main;
+  font-size: $font-size-16;
+}
+
+body {
+  font-family: $font-main;
+  color: $primary;
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border: 0;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
