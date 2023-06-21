@@ -305,18 +305,18 @@ template {
 
 * {
   margin: 0;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box; }
 
 html {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px; }
 
 body {
-  font-family: "Noto Sans KR", sans-serif;
-  color: #3f4150; }
+  font-family: "Poppins", sans-serif;
+  color: #22272b; }
 
 h1 {
   margin: 0; }
@@ -350,9 +350,9 @@ ol {
 .header {
   display: flex;
   align-items: center;
-  height: 44px;
+  height: 60px;
   padding: 0 25px;
-  background-color: #021123; }
+  background-color: #16191d; }
   .header .logo .logo-container {
     width: 78px;
     height: 16px; }
@@ -362,27 +362,176 @@ ol {
       height: 100%; }
 
 .main {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-color: #041726;
-  color: #fff; }
-
-.lists-container {
   display: flex;
-  align-items: center;
-  color: #fff; }
-  .lists-container textarea {
-    color: #fff; }
-  .lists-container button {
-    color: #fff; }
+  padding: 1rem;
+  background-color: #1d2125;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  overflow: scroll; }
 
-.list-item {
-  background-color: #b2b3b9; }
+.list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  background-color: #1d2125; }
+  .list-container textarea {
+    color: #fff; }
+  .list-container button {
+    color: #fff; }
+  .list-container .list-item {
+    min-width: 280px;
+    height: 100vh;
+    background-color: #1d2125; }
+    .list-container .list-item .list-item-container {
+      padding: 1rem;
+      border: 1px solid #22272b;
+      background-color: #0f1207;
+      border-radius: 10px;
+      box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); }
+    .list-container .list-item .list-item-title {
+      margin-bottom: 5px;
+      padding: 8px;
+      width: 100%;
+      height: 32px;
+      border: 1px solid #0f1207;
+      font-weight: 600;
+      border-radius: 6px;
+      resize: none;
+      word-wrap: break-word;
+      cursor: pointer;
+      caret-color: #fff; }
+      .list-container .list-item .list-item-title:focus {
+        border: 1px solid #579dff; }
+    .list-container .list-item .card-creator-open-btn {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      width: 100%;
+      height: 48px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      text-align: start; }
+      .list-container .list-item .card-creator-open-btn .bx-plus {
+        font-size: 14px;
+        color: #fff; }
+      .list-container .list-item .card-creator-open-btn:hover {
+        background-color: #22272b; }
+    .list-container .list-item .card-creator .new-card-title {
+      margin-top: 1rem;
+      margin-bottom: 5px;
+      padding: 8px;
+      width: 100%;
+      min-height: 36px;
+      border: 1px solid #0f1207;
+      background-color: #22272b;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 6px;
+      resize: none;
+      word-wrap: break-word;
+      cursor: pointer;
+      caret-color: #fff; }
+      .list-container .list-item .card-creator .new-card-title:focus {
+        border: 1px solid #579dff; }
+    .list-container .list-item .card-control {
+      display: flex;
+      align-items: center; }
+      .list-container .list-item .card-control .add-list-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 10px;
+        text-align: start;
+        background-color: #579dff; }
+      .list-container .list-item .card-control .card-creator-close-btn {
+        font-size: 14px;
+        color: #eff0ec; }
+
+.card-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; }
+  .card-list-container .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #8c8d96;
+    background-color: #22272b;
+    cursor: pointer; }
+    .card-list-container .card div {
+      display: flex;
+      justify-content: space-between; }
+      .card-list-container .card div .card-menu {
+        display: none;
+        width: 16px;
+        height: 16px;
+        color: #fff; }
+    .card-list-container .card:hover .card-menu {
+      display: block;
+      font-size: 1rem; }
+
+.list-creator-container {
+  min-width: 280px;
+  margin-left: 1rem;
+  height: 100vh; }
+  .list-creator-container .list-creator {
+    padding: 1rem;
+    border: 1px solid #22272b;
+    background-color: #0f1207; }
+    .list-creator-container .list-creator .new-list-title {
+      margin-bottom: 5px;
+      padding: 8px;
+      width: 100%;
+      height: 32px;
+      border: 1px solid #0f1207;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 6px;
+      resize: none;
+      word-wrap: break-word;
+      cursor: pointer;
+      caret-color: #fff; }
+      .list-creator-container .list-creator .new-list-title:focus {
+        border: 1px solid #579dff; }
+    .list-creator-container .list-creator .list-control {
+      display: flex;
+      align-items: center; }
+      .list-creator-container .list-creator .list-control .add-list-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 10px;
+        text-align: start;
+        color: #fff;
+        background-color: #579dff; }
+      .list-creator-container .list-creator .list-control .bx-x {
+        font-size: 14px;
+        color: #eff0ec; }
+  .list-creator-container .list-creator-open-btn {
+    padding: 1rem 2rem;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: start;
+    color: #fff;
+    background-color: #579dff;
+    border-radius: 10px;
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); }
+    .list-creator-container .list-creator-open-btn:hover {
+      opacity: 0.8; }
 
 #root {
   width: 100vw;
   height: 100vh;
-  margin: 0 auto; }
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  font-family: "Schibsted Grotesk", sans-serif; }
 
 /*# sourceMappingURL=style.css.map */
