@@ -1,0 +1,33 @@
+.card-list-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding: 0.75rem;
+		border-radius: 10px;
+		border: 1px solid $secondary;
+		background-color: $primary;
+		cursor: pointer;
+
+		div {
+			display: flex;
+			justify-content: space-between;
+
+			.card-menu {
+				display: none;
+				width: 16px;
+				height: 16px;
+				color: $white;
+			}
+		}
+
+		&:hover .card-menu {
+			display: block;
+			font-size: 1rem;
+		}
+	}
+}
