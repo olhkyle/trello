@@ -6,12 +6,16 @@
 
 @import './mixins/text-style';
 
-@import './components/_header';
-@import './components/_main';
-@import './components/_list';
+@import './components/header';
+@import './components/main';
+@import './components/list';
+@import './components/card';
+@import './components/listCreator';
 
 #root {
 	width: 100vw;
 	height: 100vh;
 	margin: 0 auto;
+	font-family: $font-main;
+	font-family: $font-sub;
 }
