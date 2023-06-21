@@ -1,0 +1,19 @@
+.header {
+	display: flex;
+	align-items: center;
+	height: 44px;
+	padding: 0 25px;
+	background-color: $blue-dark;
+	.logo {
+		.logo-container {
+			width: 78px;
+			height: 16px;
+
+			img {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}

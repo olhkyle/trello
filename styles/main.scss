@@ -6,4 +6,12 @@
 
 @import './mixins/text-style';
 
-// @import './components/';
+@import './components/_header';
+@import './components/_main';
+@import './components/_list';
+
+#root {
+	width: 100vw;
+	height: 100vh;
+	margin: 0 auto;
+}

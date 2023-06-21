@@ -347,4 +347,42 @@ ol {
   list-style: none;
   padding-left: 0; }
 
+.header {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 25px;
+  background-color: #021123; }
+  .header .logo .logo-container {
+    width: 78px;
+    height: 16px; }
+    .header .logo .logo-container img {
+      display: block;
+      width: 100%;
+      height: 100%; }
+
+.main {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #041726;
+  color: #fff; }
+
+.lists-container {
+  display: flex;
+  align-items: center;
+  color: #fff; }
+  .lists-container textarea {
+    color: #fff; }
+  .lists-container button {
+    color: #fff; }
+
+.list-item {
+  background-color: #b2b3b9; }
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto; }
+
 /*# sourceMappingURL=style.css.map */

@@ -42,7 +42,7 @@ class Component {
 	}
 
 	render() {
-		throw new Error(`Sub-Class of Component should implement 'Render' method which returns DOMString`);
+		throw new Error(`Sub Class of Component should implement 'Render' method which returns DOMString`);
 	}
 }
 

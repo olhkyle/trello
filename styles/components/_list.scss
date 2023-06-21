@@ -1,0 +1,18 @@
+.lists-container {
+	display: flex;
+	align-items: center;
+
+	color: $white;
+
+	textarea {
+		color: $white;
+	}
+
+	button {
+		color: $white;
+	}
+}
+
+.list-item {
+	background-color: $tertiary;
+}
