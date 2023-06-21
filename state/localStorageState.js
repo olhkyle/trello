@@ -10,13 +10,13 @@ const initialState = {
 				{ id: 1, title: 'React', description: 'my task' },
 				{ id: 2, title: 'Angular', description: '' },
 			],
-			isOpenCardComposer: false,
+			isCardCreatorOpen: false,
 		},
 		{
 			id: 2,
 			title: 'Doing Tasks',
 			cards: [{ id: 3, title: 'Algorithm', description: '' }],
-			isOpenCardComposer: false,
+			isCardCreatorOpen: false,
 		},
 		{
 			id: 3,
@@ -26,15 +26,15 @@ const initialState = {
 				{ id: 5, title: 'CSS', description: '' },
 				{ id: 6, title: 'JavaScript', description: '' },
 			],
-			isOpenCardComposer: false,
+			isCardCreatorOpen: false,
 		},
 	],
-	listComposer: {
+	listCreator: {
 		isOpen: false,
 	},
 	modal: {
 		isOpen: false,
-		isOpenCardDescComposer: false,
+		isCardDescCreatorOpen: false,
 		listId: null,
 		cardId: null,
 	},
@@ -42,6 +42,6 @@ const initialState = {
 
 const loadState = () => JSON.parse(localStorage.getItem(KEY)) || initialState;
 
-const setState = newState => localStorage.setItem(KEY, JSON.stringify(newState));
+const saveState = newState => localStorage.setItem(KEY, JSON.stringify(newState));
 
-export { loadState, setState };
+export { loadState, saveState };
