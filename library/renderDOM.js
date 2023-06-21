@@ -36,7 +36,7 @@ const renderDOM = (Component, $container) => {
 	diff($root, createNewTree());
 
 	// bind Events
-	bindEventHandler();
+	bindEventHandler($root);
 };
 
 export default renderDOM;
