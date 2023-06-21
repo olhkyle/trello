@@ -7,11 +7,11 @@ class List extends Component {
 
 		// prettier-ignore
 		return `
-      <div class="lists-container">
+      <div class="list-container">
         ${lists.map((list, idx) => `
 					<div class="list-item" data-list-index="${idx}" data-list-id="${list.id}">
 						${new ListItem({ list }).render()}
-					</div>`,).join('')}
+					</div>`).join('')}
       </div>
     `;
 	}
