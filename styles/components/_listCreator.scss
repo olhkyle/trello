@@ -4,8 +4,12 @@
 	height: 100vh;
 
 	.list-creator {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 		padding: 1rem;
 		border: 1px solid $primary;
+		border-radius: 10px;
 		background-color: $dark;
 
 		.new-list-title {
@@ -15,7 +19,8 @@
 			height: 32px;
 			border: 1px solid $dark;
 			color: $white;
-			font-weight: 600;
+			background-color: $primary;
+			font-weight: 500;
 			border-radius: 6px;
 			resize: none;
 			word-wrap: break-word;
@@ -32,8 +37,8 @@
 			align-items: center;
 
 			.add-list-btn {
-				padding: 0.5rem 0.8rem;
-				font-size: 14px;
+				padding: 0.4rem 0.8rem;
+				@include text-style-14();
 				font-weight: 500;
 				border-radius: 10px;
 				text-align: start;
@@ -42,7 +47,7 @@
 			}
 
 			.bx-x {
-				font-size: 14px;
+				@include text-style-14();
 				color: $light-gray;
 			}
 		}
