@@ -2,7 +2,7 @@ import Header from './components/Header.js';
 import Main from './components/Main.js';
 import Component from './library/Component.js';
 import { saveState, loadState } from './state/localStorageState.js';
-import { toggleIsCardCreatorOpen } from './state/manageState.js';
+import { generateListNextId, toggleIsCardCreatorOpen, removeListByClickedId } from './state/manageState.js';
 
 class App extends Component {
 	constructor() {
@@ -37,6 +37,10 @@ class App extends Component {
 
 					if (this.state.modal.isOpen) {
 						this.closeModal();
+					} else if (this.state.listCreator.isOpen) {
+						this.toggleListCreatorBtns();
+					} else if (this.state.lists.some(({ isCardCreatorOpen }) => isCardCreatorOpen)) {
+						this.closeListCardCreator(e);
 					} else {
 						this.closeAllCreator();
 					}
@@ -83,7 +87,20 @@ class App extends Component {
 	}
 
 	toggleCardCreatorBtns(target) {
-		const lists = toggleIsCardCreatorOpen(this.state.lists, +target.closest('.list-item').dataset.listId);
+		// eslint-disable-next-line no-unsafe-optional-chaining
+		const lists = toggleIsCardCreatorOpen(this.state.lists, +target.closest('.list-item')?.dataset.listId);
+
+		this.setState({ lists });
+	}
+
+	addNewList(value) {
+		const list = { id: generateListNextId(this.state.lists), title: value, cards: [], isCardCreatorOpen: false };
+
+		this.setState({ lists: [...this.state.lists, list] });
+	}
+
+	removeList(target) {
+		const lists = removeListByClickedId(this.state.lists, +target.closest('.list-item').dataset.listId);
 
 		this.setState({ lists });
 	}
@@ -94,6 +111,10 @@ class App extends Component {
 
 	closeModal(e) {
 		console.log('closemodal', e.target);
+	}
+
+	closeListCardCreator(e) {
+		this.toggleCardCreatorBtns(e.target);
 	}
 
 	// event Handlers
@@ -111,9 +132,10 @@ class App extends Component {
 		}
 
 		// TODO: list-item-container가 추가됨
-		if (e.target.matches('.add-list-btn')) {
+		if (e.target.matches('.add-card-btn')) {
 			console.log(this);
 		}
+
 		// 2. card-creator-open-btn
 		// 3. card-creator-close-btn
 		if (e.target.matches('.card-creator-open-btn') || e.target.matches('.card-creator-close-btn')) {
@@ -121,6 +143,25 @@ class App extends Component {
 		}
 
 		// 4. add-list-btn
+		if (e.target.matches('.add-list-btn')) {
+			const [$textArea] = [...e.target.closest('.list-creator').children];
+
+			const { value } = $textArea;
+			$textArea.focus();
+
+			if (value === '') {
+				$textArea.blur();
+				return;
+			}
+
+			this.addNewList(value);
+		}
+
+		// 5. delete click btn
+		if (e.target.matches('.delete-list-btn')) {
+			this.removeList(e.target);
+		}
+
 		// 6. card
 	}
 
@@ -131,6 +172,13 @@ class App extends Component {
 		if (e.key === 'Enter') {
 			if (e.target.matches('.list-item-title')) {
 				console.log(e.target);
+			}
+
+			if (e.target.matches('.new-list-title')) {
+				const { value } = e.target;
+				if (value === '') return;
+
+				this.addNewList(value);
 			}
 		}
 	}
