@@ -391,36 +391,44 @@ ol {
       background-color: #0f1207;
       border-radius: 10px;
       box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); }
-    .list-container .list-item .list-item-title {
-      margin-bottom: 5px;
-      padding: 8px;
-      width: 100%;
-      height: 32px;
-      border: 1px solid #0f1207;
-      font-weight: 600;
-      border-radius: 6px;
-      resize: none;
-      word-wrap: break-word;
-      cursor: pointer;
-      caret-color: #fff; }
-      .list-container .list-item .list-item-title:focus {
-        border: 1px solid #579dff; }
+    .list-container .list-item .list-item-title-container {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 1rem; }
+      .list-container .list-item .list-item-title-container .list-item-title {
+        margin-bottom: 5px;
+        padding: 8px;
+        width: 100%;
+        height: 32px;
+        border: 1px solid #0f1207;
+        font-weight: 600;
+        border-radius: 6px;
+        resize: none;
+        word-wrap: break-word;
+        cursor: pointer;
+        caret-color: #fff; }
+        .list-container .list-item .list-item-title-container .list-item-title:focus {
+          border: 1px solid #579dff; }
+        .list-container .list-item .list-item-title-container .list-item-title .delete-list-btn {
+          width: 14px;
+          height: 14px; }
     .list-container .list-item .card-creator-open-btn {
       display: inline-flex;
       align-items: center;
-      margin-top: 0.5rem;
-      padding: 0.5rem;
-      width: 100%;
-      height: 48px;
+      margin-top: 1rem;
+      padding: 0.5rem 0.8rem;
       font-size: 14px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
       font-weight: 500;
+      border: 1px solid #3388ff;
       border-radius: 10px;
       text-align: start; }
       .list-container .list-item .card-creator-open-btn .bx-plus {
         font-size: 14px;
         color: #fff; }
       .list-container .list-item .card-creator-open-btn:hover {
-        background-color: #22272b; }
+        background-color: #3388ff; }
     .list-container .list-item .card-creator .new-card-title {
       margin-top: 1rem;
       margin-bottom: 5px;
@@ -430,7 +438,7 @@ ol {
       border: 1px solid #0f1207;
       background-color: #22272b;
       color: #fff;
-      font-weight: 600;
+      font-weight: 500;
       border-radius: 6px;
       resize: none;
       word-wrap: break-word;
@@ -441,10 +449,13 @@ ol {
     .list-container .list-item .card-control {
       display: flex;
       align-items: center; }
-      .list-container .list-item .card-control .add-list-btn {
-        padding: 0.5rem 0.8rem;
+      .list-container .list-item .card-control .add-card-btn {
+        padding: 0.4rem 0.8rem;
         font-size: 14px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
         font-weight: 500;
+        border: 1px solid #3388ff;
         border-radius: 10px;
         text-align: start;
         background-color: #579dff; }
@@ -465,25 +476,34 @@ ol {
     border: 1px solid #8c8d96;
     background-color: #22272b;
     cursor: pointer; }
-    .card-list-container .card div {
+    .card-list-container .card .card-title {
       display: flex;
-      justify-content: space-between; }
-      .card-list-container .card div .card-menu {
+      justify-content: space-between;
+      align-items: center; }
+      .card-list-container .card .card-title .card-menu {
         display: none;
+        justify-content: center;
+        align-items: center;
         width: 16px;
         height: 16px;
         color: #fff; }
     .card-list-container .card:hover .card-menu {
-      display: block;
-      font-size: 1rem; }
+      display: inline-flex;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.01em; }
 
 .list-creator-container {
   min-width: 280px;
   margin-left: 1rem;
   height: 100vh; }
   .list-creator-container .list-creator {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     padding: 1rem;
     border: 1px solid #22272b;
+    border-radius: 10px;
     background-color: #0f1207; }
     .list-creator-container .list-creator .new-list-title {
       margin-bottom: 5px;
@@ -492,7 +512,8 @@ ol {
       height: 32px;
       border: 1px solid #0f1207;
       color: #fff;
-      font-weight: 600;
+      background-color: #22272b;
+      font-weight: 500;
       border-radius: 6px;
       resize: none;
       word-wrap: break-word;
@@ -504,8 +525,10 @@ ol {
       display: flex;
       align-items: center; }
       .list-creator-container .list-creator .list-control .add-list-btn {
-        padding: 0.5rem 0.8rem;
+        padding: 0.4rem 0.8rem;
         font-size: 14px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
         font-weight: 500;
         border-radius: 10px;
         text-align: start;
@@ -513,6 +536,8 @@ ol {
         background-color: #579dff; }
       .list-creator-container .list-creator .list-control .bx-x {
         font-size: 14px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
         color: #eff0ec; }
   .list-creator-container .list-creator-open-btn {
     padding: 1rem 2rem;
