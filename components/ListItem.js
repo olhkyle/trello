@@ -10,21 +10,23 @@ class ListItem extends Component {
 		// prettier-ignore
 		return `
 				<div class="list-item-container" draggable="true">
-					<textarea class="list-item-title">${title.trim()}</textarea>
+					<div class="list-item-title-container">
+						<textarea class="list-item-title">${title.trim()}</textarea>
+						<button class="delete-list-btn bx bx-x"></button>
+					</div>
 					<div class="card-list-container">${new CardList({ cards }).render()}</div>
-					${isCardCreatorOpen ? 
-						`<form class="card-creator">
-							<textarea class="new-card-title" placeholder="Enter a title for this card!" autofocus></textarea>
-							<div class="card-control">
-								<button class="add-list-btn">Add List</button>
-								<button type="button" class="bx bx-x bx-md card-creator-close-btn"></button>
-							</div>
-						</form>` : 
-						`<button class="card-creator-open-btn">
-							<i class="bx bx-plus"></i>
-							<span>Add a Card</span>
-						</button>`
-					}
+					<div class="card-creator-container">
+						${isCardCreatorOpen ? 
+							`<form class="card-creator">
+								<textarea class="new-card-title" placeholder="Enter a title for this card!" autofocus></textarea>
+								<div class="card-control">
+									<button class="add-card-btn">Add Card</button>
+									<button type="button" class="bx bx-x bx-md card-creator-close-btn"></button>
+								</div>
+							</form>` : 
+							`<button class="card-creator-open-btn">Add a Card</button>`
+						}
+					</div>
 				</div>
     `;
 	}

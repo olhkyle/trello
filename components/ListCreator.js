@@ -11,7 +11,7 @@ class ListCreator extends Component {
       <div class="list-creator-container">
         ${isOpen ? 
             `<form class="list-creator">
-              <textarea class="new-list-title" placeholder="Enter New List here!" autofocus></textarea>
+              <input type="text" class="new-list-title" placeholder="Enter New List here!" autofocus maxLength="512"/>
               <div class="list-control">
 								<button class="add-list-btn">Add List</button>
 								<button type="button" class="bx bx-x bx-md list-creator-close-btn" ></button>

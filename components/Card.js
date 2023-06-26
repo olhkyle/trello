@@ -5,7 +5,7 @@ class Card extends Component {
 		const { card } = this.props;
 
 		return `
-				<div>
+				<div class="card-title">
 					<p>${card.title}</p>
 					<i class="bx bx-pencil card-menu"></i>
 				</div>
