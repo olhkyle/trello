@@ -4,6 +4,7 @@ class ListCreator extends Component {
 	render() {
 		const {
 			listCreator: { isOpen },
+			lists,
 		} = this.props;
 
 		// prettier-ignore
@@ -17,7 +18,7 @@ class ListCreator extends Component {
 								<button type="button" class="bx bx-x bx-md list-creator-close-btn" ></button>
 							</div>
             </form>` : 
-            `<button class="list-creator-open-btn">+ Add another list</button>`}
+            `<button class="list-creator-open-btn">+ Add ${lists.length ? 'another' : 'new'} list</button>`}
       </div>
     `;
 	}
