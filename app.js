@@ -2,7 +2,12 @@ import Header from './components/Header.js';
 import Main from './components/Main.js';
 import Component from './library/Component.js';
 import { saveState, loadState } from './state/localStorageState.js';
-import { generateListNextId, toggleIsCardCreatorOpen, removeListByClickedId } from './state/manageState.js';
+import {
+	generateNextListId,
+	toggleIsCardCreatorOpen,
+	removeListByClickedId,
+	generateNextCardId,
+} from './state/manageState.js';
 
 class App extends Component {
 	constructor() {
@@ -37,10 +42,6 @@ class App extends Component {
 
 					if (this.state.modal.isOpen) {
 						this.closeModal();
-					} else if (this.state.listCreator.isOpen) {
-						this.toggleListCreatorBtns();
-					} else if (this.state.lists.some(({ isCardCreatorOpen }) => isCardCreatorOpen)) {
-						this.closeListCardCreator(e);
 					} else {
 						this.closeAllCreator();
 					}
@@ -81,7 +82,17 @@ class App extends Component {
 		];
 	}
 
-	// event Handler's Action
+	getListId($element) {
+		return +$element.closest('.list-item').dataset.listId;
+	}
+
+	getCardId($element) {
+		return +$element.closest('.card').dataset.cardId;
+	}
+
+	/**
+	 * Event Handler's Action
+	 */
 	toggleListCreatorBtns() {
 		this.setState({ listCreator: { isOpen: !this.state.listCreator.isOpen } });
 	}
@@ -94,27 +105,56 @@ class App extends Component {
 	}
 
 	addNewList(value) {
-		const list = { id: generateListNextId(this.state.lists), title: value, cards: [], isCardCreatorOpen: false };
+		const list = { id: generateNextListId(this.state.lists), title: value, cards: [], isCardCreatorOpen: false };
 
 		this.setState({ lists: [...this.state.lists, list] });
 	}
 
 	removeList(target) {
-		const lists = removeListByClickedId(this.state.lists, +target.closest('.list-item').dataset.listId);
+		const lists = removeListByClickedId(this.state.lists, this.getListId(target));
 
 		this.setState({ lists });
 	}
 
-	closeAllCreator(e) {
-		console.log('allCreator', e.target);
+	addCard({ target, value }) {
+		const cardId = generateNextCardId(this.state.lists.map(list => list.cards).flat());
+		const newCard = { id: cardId, title: value, description: '' };
+
+		this.setState({
+			lists: this.state.lists.map(list =>
+				list.id === this.getListId(target) ? { ...list, cards: [...list.cards, newCard] } : list,
+			),
+		});
 	}
 
-	closeModal(e) {
-		console.log('closemodal', e.target);
+	removeCard(target) {
+		const cardId = this.getCardId(target);
+		const filterCard = list => list.cards.filter(({ id }) => id !== cardId);
+
+		const lists = this.state.lists.map(list => ({ ...list, cards: filterCard(list) }));
+
+		this.setState({ lists });
+	}
+
+	// because of event delegation and dynamic DOM Creation, form's focus event temporarily maintains and we can't close form ($card-creator or $list-creator)
+	// It means we have to close all creators at the same time
+	closeAllCreator() {
+		if (this.state.lists.filter(list => list.isCardCreatorOpen).length === 0 && !this.state.listCreator.isOpen) {
+			return;
+		}
+
+		this.setState({
+			lists: this.state.lists.map(list => ({ ...list, isCardCreatorOpen: false })),
+			listCreator: { isOpen: false },
+		});
 	}
 
 	closeListCardCreator(e) {
 		this.toggleCardCreatorBtns(e.target);
+	}
+
+	closeModal(e) {
+		console.log('closemodal', e.target);
 	}
 
 	// event Handlers
@@ -127,22 +167,17 @@ class App extends Component {
 	onDrop() {}
 
 	onClick(e) {
+		// 1. click list-creator-open-btn & list-creator-close-btn
 		if (e.target.matches('.list-creator-open-btn') || e.target.matches('.list-creator-close-btn')) {
 			this.toggleListCreatorBtns();
 		}
 
-		// TODO: list-item-container가 추가됨
-		if (e.target.matches('.add-card-btn')) {
-			console.log(this);
-		}
-
-		// 2. card-creator-open-btn
-		// 3. card-creator-close-btn
+		// 2. click card-creator-open-btn & card-creator-close-btn
 		if (e.target.matches('.card-creator-open-btn') || e.target.matches('.card-creator-close-btn')) {
 			this.toggleCardCreatorBtns(e.target);
 		}
 
-		// 4. add-list-btn
+		// 3. click add-list-btn
 		if (e.target.matches('.add-list-btn')) {
 			const [$textArea] = [...e.target.closest('.list-creator').children];
 
@@ -157,28 +192,70 @@ class App extends Component {
 			this.addNewList(value);
 		}
 
-		// 5. delete click btn
+		// 4. click delete-list-btn
 		if (e.target.matches('.delete-list-btn')) {
 			this.removeList(e.target);
 		}
 
-		// 6. card
+		// 5. click delete-card-card
+		if (e.target.matches('.delete-card-btn')) {
+			this.removeCard(e.target);
+		}
 	}
 
 	onKeydown(e) {
 		if (e.isComposing) return;
 		if (e.key !== 'Enter' && e.key !== 'Escape') return;
 
-		if (e.key === 'Enter') {
+		if (e.key === 'Escape') {
+			// window keydown bind Event Handler -> event propagation works
+			e.stopPropagation();
+
+			if (e.target.matches('.new-list-title')) {
+				this.toggleListCreatorBtns();
+				return;
+			}
+
+			if (e.target.matches('.new-card-title')) {
+				this.closeListCardCreator(e);
+				return;
+			}
+
 			if (e.target.matches('.list-item-title')) {
-				console.log(e.target);
+				const val = e.target.value;
+				console.log(val);
+			}
+		}
+
+		if (e.key === 'Enter') {
+			const value = e.target.value.trim();
+
+			if (e.target.matches('.list-item-title')) {
+				const listId = this.getListId(e.target);
+				const currentValue = this.state.lists.find(list => list.id === listId).title;
+
+				if (value === '') e.target.value = currentValue;
+
+				if (value !== currentValue) {
+					this.setState({
+						// eslint-disable-next-line max-len
+						lists: this.state.lists.map(list => (list.id === listId ? { ...list, title: value } : list)),
+					});
+				}
+
+				e.target.blur();
 			}
 
 			if (e.target.matches('.new-list-title')) {
-				const { value } = e.target;
 				if (value === '') return;
 
 				this.addNewList(value);
+			}
+
+			if (e.target.matches('.new-card-title')) {
+				e.preventDefault(); // block new line
+
+				if (value !== '') this.addCard({ target: e.target, value });
 			}
 		}
 	}
@@ -190,7 +267,15 @@ class App extends Component {
 
 	onSubmit(e) {
 		e.preventDefault();
-		console.log(e.target);
+
+		const $textArea = e.target.querySelector('textarea');
+		const value = $textArea?.value.trim();
+
+		if (e.target.matches('.card-creator')) {
+			if (value === '') return;
+
+			this.addCard({ target: e.target, value });
+		}
 	}
 }
 
