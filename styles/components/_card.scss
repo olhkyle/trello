@@ -18,19 +18,19 @@
 			justify-content: space-between;
 			align-items: center;
 
-			.card-menu {
+			.delete-card-btn {
 				display: none;
 				justify-content: center;
 				align-items: center;
 				width: 16px;
 				height: 16px;
-				color: $white;
+				@include text-style-16();
 			}
 		}
 
-		&:hover .card-menu {
+		&:hover .delete-card-btn {
 			display: inline-flex;
-			@include text-style-16();
+			@include text-style-18();
 		}
 	}
 }
