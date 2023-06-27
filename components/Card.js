@@ -7,7 +7,7 @@ class Card extends Component {
 		return `
 				<div class="card-title">
 					<p>${card.title}</p>
-					<i class="bx bx-pencil card-menu"></i>
+					<button class="delete-card-btn bx bx-x"></button>
 				</div>
 				${card.description ? `<i class="bx bx-menu-alt-left has-desc"></i>` : ''}
 		`;
