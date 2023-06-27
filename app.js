@@ -71,12 +71,11 @@ class App extends Component {
 				type: 'input',
 				selector: null,
 				handler: e => {
-					if (e.target.matches('textarea')) {
-						e.target.style.height = `${e.target.scrollHeight}px`;
-						if (e.target.matches('.new-card-title')) {
-							e.target.style.height = `${4 + e.target.scrollHeight}px`;
-						}
-					}
+					if (!e.target.matches('textarea')) return;
+
+					e.target.style.height = '0px';
+					e.target.style.height = `${e.target.scrollHeight}px`;
+					e.target.style.overflow = 'hidden';
 				},
 			},
 		];
@@ -90,9 +89,19 @@ class App extends Component {
 		return +$element.closest('.card').dataset.cardId;
 	}
 
+	findListTitle({ lists, listId }) {
+		return lists.find(list => list.id === listId).title;
+	}
+
 	/**
 	 * Event Handler's Action
 	 */
+	updateListTitle({ listId, value }) {
+		const lists = this.state.lists.map(list => (list.id === listId ? { ...list, title: value } : list));
+
+		this.setState({ lists });
+	}
+
 	toggleListCreatorBtns() {
 		this.setState({ listCreator: { isOpen: !this.state.listCreator.isOpen } });
 	}
@@ -222,8 +231,11 @@ class App extends Component {
 			}
 
 			if (e.target.matches('.list-item-title')) {
-				const val = e.target.value;
-				console.log(val);
+				const listId = this.getListId(e.target);
+
+				e.target.value = this.findListTitle({ lists: this.state.lists, listId });
+
+				e.target.blur();
 			}
 		}
 
@@ -232,15 +244,18 @@ class App extends Component {
 
 			if (e.target.matches('.list-item-title')) {
 				const listId = this.getListId(e.target);
-				const currentValue = this.state.lists.find(list => list.id === listId).title;
 
-				if (value === '') e.target.value = currentValue;
+				const currentValue = this.findListTitle({ lists: this.state.lists, listId });
+
+				if (value === '') {
+					e.target.value = currentValue;
+
+					e.target.blur();
+					return;
+				}
 
 				if (value !== currentValue) {
-					this.setState({
-						// eslint-disable-next-line max-len
-						lists: this.state.lists.map(list => (list.id === listId ? { ...list, title: value } : list)),
-					});
+					this.updateListTitle({ listId, value });
 				}
 
 				e.target.blur();
