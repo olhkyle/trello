@@ -7,4 +7,4 @@ const toggleIsCardCreatorOpen = (lists, listId) =>
 
 const removeListByClickedId = (lists, listId) => lists.filter(({ id }) => id !== listId);
 
-export { generateListNextId, generateCardNextId, toggleIsCardCreatorOpen, removeListByClickedId };
+export { generateNextListId, generateNextCardId, toggleIsCardCreatorOpen, removeListByClickedId };
