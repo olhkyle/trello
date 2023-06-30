@@ -9,7 +9,7 @@ class ListItem extends Component {
 
 		// prettier-ignore
 		return `
-				<div class="list-item-container" draggable="true">
+				<div class="list-item-container">
 					<button class="delete-list-btn bx bx-x"></button>
 					<textarea class="list-item-title">${title.trim()}</textarea>
 					<div class="card-list-container">${new CardList({ cards }).render()}</div>

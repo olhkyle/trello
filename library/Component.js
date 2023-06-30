@@ -9,7 +9,7 @@ class Component {
 
 	setState(newState) {
 		this.state = { ...this.state, ...newState };
-		console.log(`[STATE]: ${this.state}`);
+		console.log(`[Rerender with STATE]:`, this.state);
 
 		renderDOM();
 	}

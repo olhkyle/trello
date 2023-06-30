@@ -7,4 +7,28 @@ const toggleIsCardCreatorOpen = (lists, listId) =>
 
 const removeListByClickedId = (lists, listId) => lists.filter(({ id }) => id !== listId);
 
-export { generateNextListId, generateNextCardId, toggleIsCardCreatorOpen, removeListByClickedId };
+const moveList = (lists, dropFromIdx, dropToIdx) => {
+	const filteredLists = [...lists].filter((_, idx) => idx !== dropFromIdx);
+	filteredLists.splice(dropToIdx, 0, lists[dropFromIdx]);
+
+	return filteredLists;
+};
+
+const moveCard = ({ lists, cardId, prevDropFromId, currentDropToId, cardIndex }) => {
+	const card = lists
+		.map(list => list.cards)
+		.flat()
+		.find(({ id }) => id === +cardId);
+
+	const listsOfRemovedCard = lists.map(list =>
+		list.id === +prevDropFromId ? { ...list, cards: list.cards.filter(({ id }) => id !== card.id) } : list,
+	);
+
+	return listsOfRemovedCard.map(list =>
+		list.id === +currentDropToId
+			? { ...list, cards: [...list.cards.slice(0, cardIndex), card, ...list.cards.slice(cardIndex)] }
+			: list,
+	);
+};
+
+export { generateNextListId, generateNextCardId, toggleIsCardCreatorOpen, removeListByClickedId, moveList, moveCard };

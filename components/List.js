@@ -9,7 +9,7 @@ class List extends Component {
 		return `
       <div class="list-container">
         ${lists.map((list, idx) => `
-					<div class="list-item" data-list-index="${idx}" data-list-id="${list.id}">
+					<div class="list-item" data-list-index="${idx}" data-list-id="${list.id}" draggable="true">
 						${new ListItem({ list }).render()}
 					</div>`).join('')}
       </div>
