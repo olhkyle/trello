@@ -1,9 +1,29 @@
 .main {
 	display: flex;
 	padding: 1rem;
-	background-color: $gray;
+	background-color: $modal-gray;
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 	color: $white;
 	overflow: scroll;
+}
+
+.drag {
+	background-color: rgba(255, 255, 255, 0.15);
+	box-shadow: none;
+	height: fit-content;
+	textarea {
+		color: $white;
+	}
+}
+
+.drag * {
+	visibility: hidden;
+}
+
+.fragment {
+	position: absolute;
+	width: 280px;
+	left: -280px;
+	transform: rotate(8deg);
 }

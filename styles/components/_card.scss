@@ -4,10 +4,12 @@
 	gap: 0.5rem;
 
 	.card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 		padding: 0.75rem;
+		width: 246px;
 		border-radius: 10px;
 		border: 1px solid $secondary;
 		background-color: $primary;
@@ -17,13 +19,26 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			clear: both;
+			overflow: hidden;
+
+			.card-content {
+				overflow: hidden;
+				word-wrap: break-word;
+			}
 
 			.delete-card-btn {
 				display: none;
+				position: absolute;
+				top: 4px;
+				right: 4px;
 				justify-content: center;
 				align-items: center;
-				width: 16px;
-				height: 16px;
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				color: $dark;
+				background-color: $white;
 				@include text-style-16();
 			}
 		}
