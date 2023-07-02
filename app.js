@@ -12,7 +12,7 @@ import {
 	generateNextCardId,
 	moveList,
 	moveCard,
-} from './state/manageState.js';
+} from './state/controller.js';
 import Modal from './components/Modal.js';
 
 class App extends Component {
