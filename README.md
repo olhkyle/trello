@@ -1,9 +1,13 @@
 # 🔭 Trello with Vanilla Javascript
 
+<img src="https://github.com/olhkyle/trello/assets/99726297/08b3f53f-a8da-436c-a046-8a1b3fbc01af"/>
+
 ## Overview
-- implemented Trello without using Library and Framework
-- designed code to create DOM dinamically, working like SPA(React)
-- implemented my own diffing algorithm for Reconciliation and CBD(Component Based Developemnt) using Class(ES6+)
+- Implemented SPA (Single Page Application) using Vanilla JavaScript without any libraries or frameworks
+- Created a Diffing algorithm similar to React's Reconciliation
+- Designed a CBD library based on the implemented Diffing algorithm, using Class (ES6+) syntax
+- Implemented various DOM event interactions using event delegation
+
 
 <br/>
 
