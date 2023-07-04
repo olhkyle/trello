@@ -364,7 +364,7 @@ ol {
 .main {
   display: flex;
   padding: 1rem;
-  background-color: #333b41;
+  background-color: #25262b;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   color: #fff;
@@ -392,7 +392,7 @@ ol {
   align-items: center;
   gap: 10px;
   color: #fff;
-  background-color: #333b41; }
+  background-color: #25262b; }
   .list-container textarea {
     height: 36px;
     line-height: 1.5rem;
@@ -626,6 +626,15 @@ ol {
   background-color: #0f1207;
   transform: translate3d(-50%, -50%, 0);
   z-index: 999; }
+  @media (min-width: 480px) {
+    .modal-container {
+      width: 480px; } }
+  @media (min-width: 768px) {
+    .modal-container {
+      width: 600px; } }
+  @media (min-width: 1024px) {
+    .modal-container {
+      width: 720px; } }
   .modal-container .modal-close-btn {
     position: absolute;
     top: 1rem;
@@ -640,7 +649,7 @@ ol {
     border-radius: 10px;
     color: #fff; }
     .modal-container .modal-close-btn:hover {
-      background-color: #333b41; }
+      background-color: #25262b; }
   .modal-container i {
     font-size: 20px;
     color: #fff; }
@@ -648,7 +657,7 @@ ol {
     margin: 0;
     margin-left: -6px;
     padding: 0 8px;
-    width: 100%;
+    width: 95%;
     min-height: 36px;
     height: 32px;
     border: 1px solid transparent;
@@ -678,10 +687,13 @@ ol {
         line-height: 34px;
         letter-spacing: -0.01em;
         font-weight: 500; }
-      .modal-container .modal-header .modal-card-title .modal-list-title {
-        text-decoration: underline; }
-        .modal-container .modal-header .modal-card-title .modal-list-title:hover {
-          color: #579dff; }
+      .modal-container .modal-header .modal-card-title .modal-card-list-item-title {
+        width: 95%;
+        word-break: break-all; }
+        .modal-container .modal-header .modal-card-title .modal-card-list-item-title a {
+          text-decoration: underline; }
+          .modal-container .modal-header .modal-card-title .modal-card-list-item-title a:hover {
+            color: #579dff; }
   .modal-container .divider {
     margin: 2rem 0;
     width: 100%;
@@ -747,7 +759,7 @@ ol {
         line-height: 24px;
         letter-spacing: -0.01em; }
         .modal-container .modal-main .modal-card-content .modal-card-content-textarea:focus {
-          background-color: #333b41; }
+          background-color: #25262b; }
 
 #root {
   width: 100vw;

@@ -24,6 +24,18 @@
 	transform: translate3d(-50%, -50%, 0);
 	z-index: 999;
 
+	@media (min-width: 480px) {
+		width: 480px;
+	}
+
+	@media (min-width: 768px) {
+		width: 600px;
+	}
+
+	@media (min-width: 1024px) {
+		width: 720px;
+	}
+
 	.modal-close-btn {
 		position: absolute;
 		top: 1rem;
@@ -39,7 +51,7 @@
 		color: $white;
 
 		&:hover {
-			background-color: $modal-gray;
+			background-color: $medium-gray;
 		}
 	}
 
@@ -52,7 +64,7 @@
 		margin: 0;
 		margin-left: -6px;
 		padding: 0 8px;
-		width: 100%;
+		width: 95%;
 		min-height: 36px;
 		height: 32px;
 		border: 1px solid transparent;
@@ -90,11 +102,15 @@
 				font-weight: 500;
 			}
 
-			.modal-list-title {
-				text-decoration: underline;
+			.modal-card-list-item-title {
+				width: 95%;
+				word-break: break-all;
+				a {
+					text-decoration: underline;
 
-				&:hover {
-					color: $blue;
+					&:hover {
+						color: $blue;
+					}
 				}
 			}
 		}
@@ -185,7 +201,7 @@
 				@include text-style-16();
 
 				&:focus {
-					background-color: $modal-gray;
+					background-color: $medium-gray;
 				}
 			}
 		}
