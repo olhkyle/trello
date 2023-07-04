@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
 
@@ -92,6 +93,11 @@ class App extends Component {
 		return lists.find(({ id }) => id === listId).title;
 	}
 
+	findCardTitle({ lists, listId, cardId }) {
+		const targetList = lists.find(list => list.id === listId);
+		return targetList?.cards.find(card => card.id === cardId)?.title;
+	}
+
 	getListId($element) {
 		return +$element.closest('.list-item').dataset.listId;
 	}
@@ -150,6 +156,19 @@ class App extends Component {
 		});
 	}
 
+	updateCardTitle(title) {
+		this.setState({
+			lists: this.state.lists.map(list =>
+				list.id === this.selectedListId
+					? {
+							...list,
+							cards: list.cards.map(card => (card.id === this.selectedCardId ? { ...card, title } : card)),
+					  }
+					: list,
+			),
+		});
+	}
+
 	removeCard(target) {
 		const cardId = this.getCardId(target);
 		const filterCard = list => list.cards.filter(({ id }) => id !== cardId);
@@ -180,7 +199,12 @@ class App extends Component {
 
 	toggleModal() {
 		this.setState({
-			modal: { ...this.state.modal, isOpen: !this.state.modal.isOpen },
+			modal: {
+				...this.state.modal,
+				isOpen: !this.state.modal.isOpen,
+				listId: this.selectedListId,
+				cardId: this.selectedCardId,
+			},
 		});
 	}
 
@@ -374,6 +398,9 @@ class App extends Component {
 				return;
 			}
 
+			this.selectedListId = +e.target.closest('.list-item').dataset.listId;
+			this.selectedCardId = +e.target.closest('.card').dataset.cardId;
+
 			this.toggleModal();
 			document.body.style.overflow = 'hidden';
 		}
@@ -399,14 +426,26 @@ class App extends Component {
 		if (e.target.matches('.description-close-btn')) {
 			const { value } = e.target.closest('.modal-card-content').querySelector('textarea');
 
-			// value 저장 필요
+			// TODO: value 저장 필요
 			this.toggleModalDescription(false);
 		}
 
 		// 10. save Description
 		if (e.target.matches('.save-btn')) {
-			this.toggleModalDescription(false);
-			// cardId 찾아서 description 저장하는 코드 필요
+			const { value: description } = e.target.closest('.modal-card-content').querySelector('textarea');
+			// this.toggleModalDescription(false);
+			// // cardId 찾아서 description 저장하는 코드 필요
+			this.setState({
+				lists: this.state.lists.map(list =>
+					list.id === this.selectedListId
+						? {
+								...list,
+								cards: list.cards.map(card => (card.id === this.selectedCardId ? { ...card, description } : card)),
+						  }
+						: list,
+				),
+				modal: { ...this.state.modal, isCardDescCreatorOpen: !this.state.modal.isCardDescCreatorOpen },
+			});
 		}
 
 		// 11. if Description Textarea is active and click Modal Container, do not close Modal and induce to save description on textarea
@@ -439,6 +478,22 @@ class App extends Component {
 				const listId = this.getListId(e.target);
 
 				this.updateListTitle({ listId, value: e.target.value });
+			}
+
+			if (e.target.matches('.modal-card-title-textarea')) {
+				const currentCardTitle = this.findCardTitle({
+					lists: this.state.lists,
+					listId: this.selectedListId,
+					cardId: this.selectedCardId,
+				});
+
+				const { value } = e.target;
+
+				if (value === '' || value === currentCardTitle) {
+					e.target.value = currentCardTitle;
+				}
+
+				e.target.blur();
 			}
 
 			if (e.target.matches('.modal-card-content-textarea')) {
@@ -480,12 +535,32 @@ class App extends Component {
 
 				if (value !== '') this.addCard({ target: e.target, value });
 			}
+
+			if (e.target.matches('.modal-card-title-textarea')) {
+				e.preventDefault(); // block new line
+
+				const currentCardTitle = this.findCardTitle({
+					lists: this.state.lists,
+					listId: this.selectedListId,
+					cardId: this.selectedCardId,
+				});
+
+				if (value === '' || value === currentCardTitle) {
+					e.target.value = currentCardTitle;
+					return;
+				}
+
+				this.updateCardTitle(value);
+
+				e.target.blur();
+			}
 		}
 	}
 
 	onFocusout(e) {
 		if (!e.target.matches('.list-item-title')) return;
-		// listitemtitle의 상태 변경
+		// TODO: listitemtitle의 상태 변경
+		// -> value === '' || value === currentListValue -> 이전 value로 e.target.value 업데이트 필요
 	}
 
 	onSubmit(e) {

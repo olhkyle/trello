@@ -4,9 +4,11 @@ class Modal extends Component {
 	render() {
 		const {
 			lists,
-			listCreator,
 			modal: { isOpen, isCardDescCreatorOpen, listId, cardId },
 		} = this.props;
+
+		const targetList = lists.find(list => list.id === listId);
+		const targetCard = targetList?.cards.find(card => card.id === cardId);
 
 		return `${
 			isOpen
@@ -15,8 +17,8 @@ class Modal extends Component {
 						<div class="modal-header">
 							<i class='bx bx-window-alt'></i>
 							<div class="modal-card-title">
-								<textarea class="modal-card-title-textarea">${lists[0].cards[0].title.trim()}</textarea>
-								<div>in list <a href="#" class="modal-list-title">${lists[0].title}</a></div>
+								<textarea class="modal-card-title-textarea">${targetCard?.title}</textarea>
+								<div class="modal-card-list-item-title">in list <a href="#">${lists.find(list => list.id === listId).title}</a></div>
 							</div>
 						</div>
 						<div class="divider"></div>
@@ -37,7 +39,9 @@ class Modal extends Component {
 											: ''
 									}
 								</div>
-								<textarea class="modal-card-content-textarea" placeholder="Add a more detailed description"></textarea>
+								<textarea class="modal-card-content-textarea" placeholder="Add a more detailed description">${
+									targetCard?.description
+								}</textarea>
 							</div>
 						</div>
 					</div>
