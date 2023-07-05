@@ -1,3 +1,10 @@
+const findListTitle = ({ lists, listId }) => lists.find(({ id }) => id === listId).title;
+
+const findCardTitle = ({ lists, listId, cardId }) => {
+	const targetList = lists.find(list => list.id === listId);
+	return targetList?.cards.find(card => card.id === cardId)?.title;
+};
+
 const generateNextListId = lists => Math.max(...lists.map(({ id }) => id), 0) + 1;
 
 const generateNextCardId = cards => Math.max(...cards.map(({ id }) => id), 0) + 1;
@@ -31,4 +38,13 @@ const moveCard = ({ lists, cardId, prevDropFromId, currentDropToId, cardIndex })
 	);
 };
 
-export { generateNextListId, generateNextCardId, toggleIsCardCreatorOpen, removeListByClickedId, moveList, moveCard };
+export {
+	findListTitle,
+	findCardTitle,
+	generateNextListId,
+	generateNextCardId,
+	toggleIsCardCreatorOpen,
+	removeListByClickedId,
+	moveList,
+	moveCard,
+};

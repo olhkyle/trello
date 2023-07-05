@@ -1,7 +1,6 @@
 .list-container {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	gap: 10px;
 	color: $white;
 	background-color: $medium-gray;
@@ -14,69 +13,70 @@
 		overflow: scroll;
 	}
 
+	p,
 	button {
 		color: $white;
 	}
 
 	.list-item {
 		min-width: 280px;
-		height: 100%;
 		border-radius: 10px;
 
 		.list-item-container {
-			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
 			padding: 1rem;
 			border: 1px solid $tertiary;
 			background-color: $dark-gray;
 			border-radius: 10px;
 			box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
 
-			.list-item-title {
-				margin-bottom: 5px;
-				padding: 6px 8px;
-				width: 90%;
-				// height: 36px;
-				min-height: 36px;
-				max-height: 256px;
-				border: 1px solid $dark;
-				font-weight: 600;
-				border-radius: 6px;
-				resize: none;
-				// overflow-wrap: break-word;
-				color: $white;
-				word-wrap: break-word;
-				caret-color: $white;
-				cursor: pointer;
-				-ms-overflow-style: none; /* IE and Edge */
-				scrollbar-width: none; /* Firefox */
-
-				&:focus {
-					border: 1px solid $blue;
-				}
-
-				&::-webkit-scrollbar {
-					display: none; /* Chrome, Safari, Opera*/
-				}
-			}
-
-			.delete-list-btn {
-				position: absolute;
-				display: inline-flex;
-				justify-content: center;
+			.list-item-header {
+				display: flex;
+				justify-content: space-between;
 				align-items: center;
-				top: 22px;
-				right: 12px;
-				width: 18px;
-				height: 18px;
-				color: $white;
-				@include text-style-18();
+
+				.list-item-title {
+					padding: 6px 8px;
+					width: 90%;
+					min-height: 36px;
+					max-height: 256px;
+					border: 1px solid $dark;
+					font-weight: 600;
+					border-radius: 6px;
+					resize: none;
+					color: $white;
+					word-wrap: break-word;
+					caret-color: $white;
+					cursor: pointer;
+					-ms-overflow-style: none; /* IE and Edge */
+					scrollbar-width: none; /* Firefox */
+
+					&:focus {
+						border: 1px solid $blue;
+					}
+
+					&::-webkit-scrollbar {
+						display: none; /* Chrome, Safari, Opera*/
+					}
+				}
+
+				.delete-list-btn {
+					display: inline-flex;
+					justify-content: center;
+					align-items: center;
+					width: 18px;
+					height: 18px;
+					color: $white;
+					@include text-style-18();
+				}
 			}
 		}
 
 		.card-creator-open-btn {
 			display: inline-flex;
 			align-items: center;
-			margin-top: 1rem;
 			padding: 0.5rem 0.8rem;
 			@include text-style-14();
 			font-weight: 500;
@@ -96,7 +96,7 @@
 
 		.card-creator {
 			.new-card-title {
-				margin: 1rem 0 6px;
+				margin: 0 0 6px;
 				padding: 6px 8px;
 				width: 100%;
 				min-height: 36px;

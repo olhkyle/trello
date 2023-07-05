@@ -1,7 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable import/extensions */
-
 import Component from './library/Component.js';
 import Header from './components/Header.js';
 import Main from './components/Main.js';
@@ -13,6 +9,8 @@ import {
 	generateNextCardId,
 	moveList,
 	moveCard,
+	findListTitle,
+	findCardTitle,
 } from './state/controller.js';
 import Modal from './components/Modal.js';
 
@@ -70,11 +68,7 @@ class App extends Component {
 				selector: null,
 				handler: this.onKeydown.bind(this),
 			},
-			{
-				type: 'focusout',
-				selector: null,
-				handler: this.onFocusout.bind(this),
-			},
+
 			{ type: 'submit', selector: null, handler: this.onSubmit.bind(this) },
 			{
 				type: 'input',
@@ -82,21 +76,20 @@ class App extends Component {
 				handler: e => {
 					if (!e.target.matches('textarea')) return;
 
-					// e.target.style.height = '0px';
 					e.target.style.height = `${e.target.scrollHeight}px`;
 				},
 			},
 		];
 	}
 
-	findListTitle({ lists, listId }) {
-		return lists.find(({ id }) => id === listId).title;
-	}
+	// findListTitle({ lists, listId }) {
+	// 	return lists.find(({ id }) => id === listId).title;
+	// }
 
-	findCardTitle({ lists, listId, cardId }) {
-		const targetList = lists.find(list => list.id === listId);
-		return targetList?.cards.find(card => card.id === cardId)?.title;
-	}
+	// findCardTitle({ lists, listId, cardId }) {
+	// 	const targetList = lists.find(list => list.id === listId);
+	// 	return targetList?.cards.find(card => card.id === cardId)?.title;
+	// }
 
 	getListId($element) {
 		return +$element.closest('.list-item').dataset.listId;
@@ -223,10 +216,30 @@ class App extends Component {
 	}
 
 	makeModalDescriptionCautionActive(target) {
-		const $modalContainer = target.closest('.modal-container');
+		let $modalContainer = null;
+
+		if (target.closest('.modal-container')) {
+			$modalContainer = target.closest('.modal-container');
+		} else if (target.closest('.overlay')) {
+			$modalContainer = target.closest('#root').querySelector('.modal-container');
+		}
 
 		$modalContainer.querySelector('.caution').style.display = 'block';
 		$modalContainer.querySelector('.modal-card-content-textarea').focus();
+	}
+
+	saveModalDescription(description) {
+		this.setState({
+			lists: this.state.lists.map(list =>
+				list.id === this.selectedListId
+					? {
+							...list,
+							cards: list.cards.map(card => (card.id === this.selectedCardId ? { ...card, description } : card)),
+					  }
+					: list,
+			),
+			modal: { ...this.state.modal, isCardDescCreatorOpen: !this.state.modal.isCardDescCreatorOpen },
+		});
 	}
 
 	addDragImage() {
@@ -271,6 +284,8 @@ class App extends Component {
 
 	onDragend() {
 		this.$dragTarget.classList.remove('drag');
+
+		console.log('dragend');
 		this.removeDragImage();
 	}
 
@@ -278,7 +293,7 @@ class App extends Component {
 		const $dropTarget = e.target;
 		const $dropList = $dropTarget.closest('.list-item');
 
-		// allow $element to drop
+		// Default option to allow $element to drop
 		e.preventDefault();
 
 		if ($dropList === null) return;
@@ -333,8 +348,11 @@ class App extends Component {
 
 			const lists = moveList(this.state.lists, prevDropFromIdx, currentDropToIdx);
 
-			this.setState({ lists });
-			console.log('onDrop');
+			setTimeout(() => {
+				this.setState({ lists });
+			}, 10);
+
+			console.log('drop');
 
 			return;
 		}
@@ -353,13 +371,17 @@ class App extends Component {
 			const lists = moveCard({ lists: this.state.lists, cardId, prevDropFromId, currentDropToId, cardIndex });
 
 			// because of triggering dragend after drop, make setState call after push dragend event handler
-			this.setState({ lists });
-			console.log('onDrop');
+			setTimeout(() => {
+				this.setState({ lists });
+			}, 10);
+
+			console.log('drop');
 		}
 	}
 
 	onClick(e) {
 		if (e.target.nodeName === 'A') e.preventDefault();
+
 		// 1. click list-creator-open-btn & list-creator-close-btn
 		if (e.target.matches('.list-creator-open-btn') || e.target.matches('.list-creator-close-btn')) {
 			this.toggleListCreatorBtns();
@@ -424,28 +446,14 @@ class App extends Component {
 
 		// 9. close Description textarea
 		if (e.target.matches('.description-close-btn')) {
-			const { value } = e.target.closest('.modal-card-content').querySelector('textarea');
-
-			// TODO: value 저장 필요
 			this.toggleModalDescription(false);
 		}
 
 		// 10. save Description
 		if (e.target.matches('.save-btn')) {
 			const { value: description } = e.target.closest('.modal-card-content').querySelector('textarea');
-			// this.toggleModalDescription(false);
-			// // cardId 찾아서 description 저장하는 코드 필요
-			this.setState({
-				lists: this.state.lists.map(list =>
-					list.id === this.selectedListId
-						? {
-								...list,
-								cards: list.cards.map(card => (card.id === this.selectedCardId ? { ...card, description } : card)),
-						  }
-						: list,
-				),
-				modal: { ...this.state.modal, isCardDescCreatorOpen: !this.state.modal.isCardDescCreatorOpen },
-			});
+
+			this.saveModalDescription(description);
 		}
 
 		// 11. if Description Textarea is active and click Modal Container, do not close Modal and induce to save description on textarea
@@ -481,7 +489,7 @@ class App extends Component {
 			}
 
 			if (e.target.matches('.modal-card-title-textarea')) {
-				const currentCardTitle = this.findCardTitle({
+				const currentCardTitle = findCardTitle({
 					lists: this.state.lists,
 					listId: this.selectedListId,
 					cardId: this.selectedCardId,
@@ -508,7 +516,7 @@ class App extends Component {
 			if (e.target.matches('.list-item-title')) {
 				const listId = this.getListId(e.target);
 
-				const currentValue = this.findListTitle({ lists: this.state.lists, listId });
+				const currentValue = findListTitle({ lists: this.state.lists, listId });
 
 				if (value === '') {
 					e.target.value = currentValue;
@@ -539,7 +547,7 @@ class App extends Component {
 			if (e.target.matches('.modal-card-title-textarea')) {
 				e.preventDefault(); // block new line
 
-				const currentCardTitle = this.findCardTitle({
+				const currentCardTitle = findCardTitle({
 					lists: this.state.lists,
 					listId: this.selectedListId,
 					cardId: this.selectedCardId,
@@ -555,12 +563,6 @@ class App extends Component {
 				e.target.blur();
 			}
 		}
-	}
-
-	onFocusout(e) {
-		if (!e.target.matches('.list-item-title')) return;
-		// TODO: listitemtitle의 상태 변경
-		// -> value === '' || value === currentListValue -> 이전 value로 e.target.value 업데이트 필요
 	}
 
 	onSubmit(e) {

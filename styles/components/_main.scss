@@ -24,6 +24,119 @@
 .fragment {
 	position: absolute;
 	width: 280px;
-	left: -280px;
+	left: -1000px;
 	transform: rotate(8deg);
+
+	textarea {
+		padding: 6px 8px;
+		min-height: 36px;
+		max-height: 256px;
+		height: 36px;
+		line-height: 1.5rem;
+		background-color: $gray;
+		border-radius: 6px;
+		color: $white;
+		resize: none;
+		overflow: scroll;
+	}
+
+	p,
+	button {
+		color: $white;
+	}
+}
+
+.fragment.list-item {
+	.list-item-container {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+		border: 1px solid $tertiary;
+		background-color: $dark-gray;
+		border-radius: 10px;
+		box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+
+		.list-item-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.list-item-title {
+				width: 90%;
+			}
+
+			.delete-list-btn {
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				width: 18px;
+				height: 18px;
+				color: $white;
+				@include text-style-18();
+			}
+		}
+
+		.card-creator-container {
+			.card-creator-open-btn {
+				display: inline-flex;
+				align-items: center;
+				padding: 0.5rem 0.8rem;
+				@include text-style-14();
+				font-weight: 500;
+				border: 1px solid $deepblue;
+				border-radius: 10px;
+				text-align: start;
+
+				.bx-plus {
+					font-size: 14px;
+					color: $white;
+				}
+
+				&:hover {
+					background-color: $deepblue;
+				}
+			}
+		}
+	}
+}
+
+.fragment.card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 0.75rem;
+	width: 246px;
+	border-radius: 10px;
+	border: 1px solid $secondary;
+	background-color: $primary;
+	cursor: pointer;
+
+	.card-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		clear: both;
+		overflow: hidden;
+
+		.card-content {
+			overflow: hidden;
+			word-wrap: break-word;
+		}
+
+		.delete-card-btn {
+			display: none;
+			position: absolute;
+			top: 4px;
+			right: 4px;
+			justify-content: center;
+			align-items: center;
+			width: 20px;
+			height: 20px;
+			border-radius: 10px;
+			color: $dark;
+			background-color: $white;
+			@include text-style-16();
+		}
+	}
 }
