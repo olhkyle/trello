@@ -105,12 +105,10 @@
 			.modal-card-list-item-title {
 				width: 95%;
 				word-break: break-all;
-				a {
+				span {
+					font-weight: 500;
 					text-decoration: underline;
-
-					&:hover {
-						color: $blue;
-					}
+					color: $blue;
 				}
 			}
 		}

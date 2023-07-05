@@ -18,7 +18,9 @@ class Modal extends Component {
 							<i class='bx bx-window-alt'></i>
 							<div class="modal-card-title">
 								<textarea class="modal-card-title-textarea">${targetCard?.title}</textarea>
-								<div class="modal-card-list-item-title">in list <a href="#">${lists.find(list => list.id === listId).title}</a></div>
+								<div class="modal-card-list-item-title">in list <span href="#">${
+									lists.find(list => list.id === listId).title
+								}</span></div>
 							</div>
 						</div>
 						<div class="divider"></div>
