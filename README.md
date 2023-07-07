@@ -137,11 +137,11 @@
 
 <details>
   <summary>
-  <h3>💡 Event Delegation, 'this' binding and event Handling</h3>
+  <h3>☕️☕️ Event Delegation, 'this' binding and event Handling</h3>
   </summary>
 
   <div markdown="2">
-  - Class Component로 컴포넌트를 구현하면서 이벤트 위임, 그리고 this 바인딩, 이벤트 핸들링 방식에 대해 고민하였습니다.
+  - Class로 컴포넌트를 구현하면서 이벤트 위임, 그리고 this 바인딩, 이벤트 핸들링 방식에 대해 고민하였습니다.
 
     
    - 이벤트 위임을 통해 모든 이벤트를 핸들링 하도록 구현하였다. 즉, `$root`라는 루트 컨테이너 요소에 이벤트를 위임함으로써, 자식 컴포넌트에서 발생하는 이벤트를 핸들링하고 있습니다.
