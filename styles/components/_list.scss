@@ -70,6 +70,10 @@
 					height: 18px;
 					color: $white;
 					@include text-style-18();
+
+					&:hover {
+						color: $deepblue;
+					}
 				}
 			}
 		}

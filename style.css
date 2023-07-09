@@ -540,6 +540,8 @@ ol {
           font-size: 18px;
           line-height: 28px;
           letter-spacing: -0.02em; }
+          .list-container .list-item .list-item-container .list-item-header .delete-list-btn:hover {
+            color: #3388ff; }
     .list-container .list-item .card-creator-open-btn {
       display: inline-flex;
       align-items: center;
