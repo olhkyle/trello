@@ -82,15 +82,6 @@ class App extends Component {
 		];
 	}
 
-	// findListTitle({ lists, listId }) {
-	// 	return lists.find(({ id }) => id === listId).title;
-	// }
-
-	// findCardTitle({ lists, listId, cardId }) {
-	// 	const targetList = lists.find(list => list.id === listId);
-	// 	return targetList?.cards.find(card => card.id === cardId)?.title;
-	// }
-
 	getListId($element) {
 		return +$element.closest('.list-item').dataset.listId;
 	}

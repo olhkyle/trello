@@ -4,17 +4,13 @@ import ListCreator from './ListCreator.js';
 
 class Main extends Component {
 	render() {
-		const {
-			lists,
-			listCreator,
-			modal: { isOpen },
-		} = this.props;
+		const { lists, listCreator } = this.props;
 
 		const $list = new List({ lists });
 		const $listCreator = new ListCreator({ listCreator, lists });
 
 		return `
-      <main class="main ${isOpen ? 'non-scroll' : ''}">
+      <main class="main">
         ${$list.render()}
 				${$listCreator.render()}
 			</main>
