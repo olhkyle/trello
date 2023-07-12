@@ -24,7 +24,7 @@
 <img width="920" src="https://github.com/olhkyle/trello/assets/99726297/31a7e51e-d3c1-44f3-9f66-48fe2b24d04c">
 
 - add Another List
-- add new Card with using Card Creator
+- add new Card with using `Card Creator`
 - remove list
 
 <br/>
@@ -34,7 +34,7 @@
 <img width="920" src="https://github.com/olhkyle/trello/assets/99726297/938a53b5-6e86-43c7-a9a9-27a61b6222bd">
 
 - change title of list with pressing 'Enter' key to save new title
-- add new Card with using Card Creator
+- add new Card with using `Card Creator`
 
 <br/>
 
