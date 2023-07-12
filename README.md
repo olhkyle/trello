@@ -112,15 +112,11 @@
       DOMString을 모아,이를 바탕으로 UI를 그립니다.
 
   - **Rerendering**
-    - 컴포넌트가 갖고 있는 상태가 변하면, UI를 다시 그려야 합니다. 이 때, `setState`라는 상태 업데이트 함수를 호출하면서
-      , renderDOM이라는 함수는 리렌더링을 위해 다시 호출됩니다. 이 때, 인수로 `Component`와 `$container`를 전달하지 않습
+    - 컴포넌트가 갖고 있는 상태가 변하면, UI를 다시 그려야 합니다. 이 때, `setState`라는 상태 업데이트 함수를 호출하면서, renderDOM이라는 함수는 리렌더링을 위해 다시 호출됩니다. 이 때, 인수로 `Component`와 `$container`를 전달하지 않습
       니다.
     - 그 이유는, Initial Rendering 시에 `renderDOM` 함수 스코프 바깥에 선언한 `$root`(id가 root인 요소)에는 `App` Class
-      Component가 재귀적으로 호출한 자식 컴포넌트들이 반환하는 DOMString이 `innerHTML` 메서드를 통해 할당되어 있어, 클로
-      저에 의해 어떤 UI를 그릴 지에 대한 정보를 이미 담고 있습니다. 이 `$root`는 뒤에서 이야기할 메모리에 DOMString이 저
-      장된 **oldNode**가 됩니다.
-    - 리렌더링이 발생하면 업데이트 된 상태를 기반으로 UI를 다시 그려야 합니다. 먼저, `createNewTree`라는 함수를 호출하여
-      , 복제한 `$root` 변수에 업데이트 된 상태를 가진 `component` 변수가 저장하고 있는 DOMString(`App` Class Component가
+      Component가 재귀적으로 호출한 자식 컴포넌트들이 반환하는 DOMString이 `innerHTML` 메서드를 통해 할당되어 있어, 클로저에 의해 어떤 UI를 그릴 지에 대한 정보를 이미 담고 있습니다. 이 `$root`는 뒤에서 이야기할 메모리에 DOMString이 저장된 **oldNode**가 됩니다.
+    - 리렌더링이 발생하면 업데이트 된 상태를 기반으로 UI를 다시 그려야 합니다. 먼저, `createNewTree`라는 함수를 호출하여, 복제한 `$root` 변수에 업데이트 된 상태를 가진 `component` 변수가 저장하고 있는 DOMString(`App` Class Component가
       재귀적으로 자식 컴포넌트를 호출하면서 끌어모은 DOMstring 값)을 `innerHTML` 메서드를 통해 할당하고, 복제한
       `$root`를 반환합니다.
     - 그리고, `diff` 함수(diffing 알고리즘이 구현된 함수)를 호출하여, 기존에 메모리에 올려져 있던 `oldNode`(type ===
@@ -130,8 +126,7 @@
       다른 부분(e.g 요소 노드, 어트리뷰트 노드 등)만 업데이트 하는 방식을 취합니다.
     - 결과적으로, 메모리에 올려져 있는 객체(DOMString)의 참조값을 비교하면서 업데이트 한다고 설명할 수 있습니다.
 
-> ☕️ DOMstring은 utf-16 문자열을 위한 독립적으로 구현된 DOM 인터페이스로, javascript 문자열은 이미 utf-16 문자열형태이
-> 다. 따라서, javascript의 모든 인스턴스 String은 DOMString 인스턴스라고 이야기 할 수 있다.
+> ☕️ DOMstring은 utf-16 문자열을 위한 독립적으로 구현된 DOM 인터페이스로, javascript 문자열은 이미 utf-16 문자열 형태이다. 따라서, javascript의 모든 인스턴스 String은 DOMString 인스턴스라고 이야기 할 수 있다.
 
   </div>
 </details>
