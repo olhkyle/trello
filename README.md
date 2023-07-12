@@ -52,12 +52,13 @@
 - Open `Modal` Component, after click `Card` component
   - After Click `textarea` component and insert some words, press 'Enter' to save `Card` Component's title
   - If click `textarea` in description part, then we have to save the contents.
-    - The situation Trello will not save contents
+    - The situations Trello will not save contents
       1. click the `overlay` area
       2. click the area without `textarea` in description part
-      3. click close `button` component
+      3. click 'x' `button` component
       4. after click `textarea` in description part, if we do not click 'save' button or press 'Enter' as `textarea` is
          focused
+ - Close `Modal` clicking outside of `modal`, or clicking `Close Button`.
 
 <br/>
 <br/>
