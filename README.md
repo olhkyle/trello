@@ -66,7 +66,7 @@
 
 <details>
   <summary>
-  <h3> ☕️ Rendering based on Diff Algorithm and Reconciliation mentioned in React</h3>
+  <h3> ☕️ Rendering based on Reconciliation mentioned in React using a Diffing Algorithm</h3>
   </summary>
 
   <div markdown="1">
@@ -75,7 +75,7 @@
   며, `#root` 의 자식 요소들은 어플리케이션을 실행하면 정의한 컴포넌트들이 반환하는 문자열(DOMString)이 파싱 과정에 의해
   DOM 요소로 변환되어 동적으로 화면을 그리도록 구현하였습니다.
 
-- React의 **reconciliation**와 유사하게 작동하도록 Diffing 알고리즘 구현
+- 효율적인 렌더링을 위한 Diffing 알고리즘 및 CBD 구현
 
   ```js
   // renderDOM.js
@@ -141,7 +141,7 @@
   </summary>
 
   <div markdown="2">
-  - Class로 컴포넌트를 구현하면서 이벤트 위임, 그리고 this 바인딩, 이벤트 핸들링 방식에 대해 고민하였습니다.
+  - class 컴포넌트를 구현하면서 이벤트 위임, 그리고 this 바인딩, 이벤트 핸들링 방식에 대해 고민하였습니다.
 
     
    - 이벤트 위임을 통해 모든 이벤트를 핸들링 하도록 구현하였습니다. 즉, `$root`라는 루트 컨테이너 요소에 이벤트를 위임함으로써, 자식 컴포넌트에서 발생하는 이벤트를 핸들링하고 있습니다.
@@ -158,5 +158,5 @@
 - 바닐라 자바스크립트로 웹 어플리케이션을 만들어 본 값진 경험
   - 라이브러리 없이 바닐라 자바스크립트만을 이용하여 SPA처럼 구현할 때 이벤트를 핸들링하고 컴포넌트를 렌더링하는 과정은
     상당히 어려웠지만, 구현이 완료되었을 때 상당히 만족스러웠습니다.
-  - this 바인딩, 클래스 Syntax에 대한 이해도가 이전보다 높아졌다고 생각합니다.
-  - 잘 쓰지 않았던 DOM API에 대해 알게 되어 좋았음며, 이벤트 위임을 활용한 이벤트 핸들링 경험은 값졌습니다.
+  - this 바인딩, class Syntax에 대한 이해도가 이전보다 높아졌다고 생각합니다.
+  - 잘 쓰지 않았던 DOM API에 대해 알게 되어 좋았으며, 이벤트 위임을 활용한 이벤트 핸들링 경험은 값졌습니다.
