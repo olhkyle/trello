@@ -460,7 +460,7 @@ class App extends Component {
 		if (e.key !== 'Enter' && e.key !== 'Escape') return;
 
 		if (e.key === 'Escape') {
-			// window keydown bind Event Handler -> event propagation works
+			// window 'keydown' bind Event Handler -> event propagation works
 			e.stopPropagation();
 
 			if (e.target.matches('.new-list-title')) {
