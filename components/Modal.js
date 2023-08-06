@@ -30,7 +30,7 @@ class Modal extends Component {
 								<div class="modal-card-content-header">
 									<div class="content-title-wrapper">
 										<div class="content-title">Description</div>
-										<span class="caution">Please save your change 👉</span>
+										<span class="caution">Save your change 👉</span>
 									</div>
 									${
 										isCardDescCreatorOpen
