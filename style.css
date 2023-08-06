@@ -384,7 +384,7 @@ ol {
   position: absolute;
   width: 280px;
   left: -1000px;
-  transform: rotate(8deg); }
+  transform: rotate(6deg); }
   .fragment textarea {
     padding: 6px 8px;
     min-height: 36px;
@@ -712,20 +712,20 @@ ol {
   top: 50%;
   left: 50%;
   padding: 2rem;
-  width: 720px;
+  width: 320px;
   border: 1px solid #b2b3b9;
   border-radius: 12px;
   color: #fff;
   background-color: #0f1207;
   transform: translate3d(-50%, -50%, 0);
   z-index: 999; }
-  @media (min-width: 480px) {
+  @media screen and (min-width: 480px) {
     .modal-container {
       width: 480px; } }
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     .modal-container {
       width: 600px; } }
-  @media (min-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     .modal-container {
       width: 720px; } }
   .modal-container .modal-close-btn {
@@ -807,11 +807,16 @@ ol {
       .modal-container .modal-main .modal-card-content .modal-card-content-header {
         display: flex;
         justify-content: space-between;
-        height: 35px; }
+        gap: 0.5rem;
+        min-height: 35px; }
         .modal-container .modal-main .modal-card-content .modal-card-content-header .content-title-wrapper {
           display: inline-flex;
-          gap: 1rem;
+          flex-direction: column;
           align-items: center; }
+          @media screen and (min-width: 520px) {
+            .modal-container .modal-main .modal-card-content .modal-card-content-header .content-title-wrapper {
+              flex-direction: row;
+              gap: 0.8rem; } }
           .modal-container .modal-main .modal-card-content .modal-card-content-header .content-title-wrapper .content-title {
             font-size: 18px;
             line-height: 28px;
@@ -820,43 +825,64 @@ ol {
           .modal-container .modal-main .modal-card-content .modal-card-content-header .content-title-wrapper .caution {
             display: none;
             margin-top: 0.2rem;
-            color: #f86d7d; }
+            color: #f86d7d;
+            font-size: 9px; }
+            @media screen and (min-width: 520px) {
+              .modal-container .modal-main .modal-card-content .modal-card-content-header .content-title-wrapper .caution {
+                font-size: 13px;
+                line-height: 20px;
+                letter-spacing: -0.01em;
+                text-align: end; } }
         .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control {
           display: flex;
           align-items: center;
           gap: 10px; }
           .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control .save-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.25rem 0.5rem;
             border-radius: 10px;
             color: #fff;
             background-color: #579dff; }
             .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control .save-btn:hover {
               background-color: #3388ff; }
+            @media screen and (min-width: 520px) {
+              .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control .save-btn {
+                padding: 0.5rem 1rem; } }
           .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control .description-close-btn {
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            width: 35px;
-            height: 35px;
+            width: 27px;
+            height: 27px;
             font-size: 24px;
             color: #fff;
             border-radius: 10px;
             background-color: #f86d7d; }
             .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control .description-close-btn:hover {
               background-color: #fc5367; }
+            @media screen and (min-width: 520px) {
+              .modal-container .modal-main .modal-card-content .modal-card-content-header .description-control .description-close-btn {
+                width: 35px;
+                height: 35px; } }
       .modal-container .modal-main .modal-card-content .modal-card-content-textarea {
         padding: 6px 8px;
         min-height: 120px;
-        max-height: 600px;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: -0.01em; }
+        max-height: 300px;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: -0.005em; }
         .modal-container .modal-main .modal-card-content .modal-card-content-textarea:focus {
           background-color: #25262b; }
+        @media screen and (min-width: 520px) {
+          .modal-container .modal-main .modal-card-content .modal-card-content-textarea {
+            min-height: 120px;
+            max-height: 600px;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.01em; } }
 
 #root {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   margin: 0 auto;
   font-family: "Poppins", sans-serif;
   font-family: "Schibsted Grotesk", sans-serif; }
