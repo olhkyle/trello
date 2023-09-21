@@ -8,6 +8,7 @@
 - Created a Diffing algorithm for efficient rendering(Reconciliation)
 - Designed a CBD library based on the implemented Diffing algorithm, using Class (ES6+) syntax
 - Implemented various DOM event interactions using event delegation
+- Define Components as declarative views with state
 
 <br/>
 
